@@ -1,0 +1,137 @@
+.chat-page {
+  max-width: 800px;
+  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header {
+  padding: 20px;
+  background: #1dbf73;
+  color: white;
+  text-align: center;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background: #f9f9f9;
+}
+
+.chat-message {
+  margin-bottom: 14px;
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.chat-message.sent {
+  background: #1dbf73;
+  color: white;
+  margin-left: auto;
+}
+
+.chat-message.received {
+  background: #eee;
+  color: #333;
+  margin-right: auto;
+}
+
+.sender {
+  font-size: 12px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.text {
+  margin: 0;
+  word-wrap: break-word;
+}
+
+.time {
+  font-size: 10px;
+  color: #666;
+  position: absolute;
+  bottom: 4px;
+  right: 8px;
+}
+
+.chat-input-area {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+
+.chat-input-area input {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.chat-input-area button {
+  padding: 0 20px;
+  background: #1dbf73;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.chat-input-area .file-btn {
+  padding: 0 12px;
+  background: #7c8ba3;
+  font-size: 18px;
+}
+
+.chat-input-area .file-btn:hover {
+  background: #6b7a94;
+}
+
+.chat-input-area button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.attachment {
+  margin: 8px 0;
+}
+
+.attachment-img {
+  max-width: 200px;
+  border-radius: 6px;
+  margin: 6px 0;
+}
+
+.attachment-link {
+  display: inline-block;
+  padding: 8px 12px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #1dbf73;
+  font-weight: 600;
+}
+
+.sent .attachment-link {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .chat-page {
+    height: 100vh;
+  }
+
+  .chat-messages {
+    padding: 12px;
+  }
+
+  .chat-header h2 {
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,86 @@
+.order-tracking {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.tracking-header {
+  margin-bottom: 30px;
+}
+
+.tracking-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 8px;
+}
+
+.tracking-header p {
+  color: #888;
+  font-size: 16px;
+}
+
+/* Filter Buttons */
+.filter-buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 10px 18px;
+  border: 2px solid #ddd;
+  background: white;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  color: #555;
+}
+
+.filter-btn:hover {
+  border-color: #1dbf73;
+  color: #1dbf73;
+}
+
+.filter-btn.active {
+  background: #1dbf73;
+  color: white;
+  border-color: #1dbf73;
+}
+
+/* Orders Container */
+.orders-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.no-orders {
+  text-align: center;
+  padding: 60px 20px;
+  color: #999;
+  font-size: 18px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .order-tracking {
+    padding: 20px 15px;
+  }
+
+  .tracking-header h1 {
+    font-size: 24px;
+  }
+
+  .filter-buttons {
+    gap: 8px;
+  }
+
+  .filter-btn {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+}

@@ -1,15 +1,11 @@
-<<<<<<< HEAD
-# freelancer
-This is fiverr like clone website where you can book service
-=======
 # Freelance Marketplace (React + Firebase)
 
-Role-based freelance marketplace with strict Buyer/Seller separation.
+A Fiverr-style freelance marketplace with strict Buyer/Seller role separation, Firebase-backed auth/data, and production deployment configs.
 
 ## Tech Stack
-- React.js
+- React (CRA)
 - Firebase Authentication
-- Firestore Database
+- Firestore
 - Firebase Storage
 - React Router
 - Material UI
@@ -18,7 +14,7 @@ Role-based freelance marketplace with strict Buyer/Seller separation.
 - `buyer`
 - `seller`
 
-User profile document schema in `users/{uid}`:
+User profile document schema (`users/{uid}`):
 - `name`
 - `email`
 - `role` (`buyer` | `seller`)
@@ -27,8 +23,9 @@ User profile document schema in `users/{uid}`:
 - `createdAt`
 
 ## Route Structure
+
 ### Public
-- `/` (homepage)
+- `/`
 - `/login`
 - `/signup`
 - `/gigs`
@@ -38,7 +35,7 @@ User profile document schema in `users/{uid}`:
 - `/buyer-dashboard`
 - `/my-orders`
 - `/reviews`
-- `/order` (place order flow)
+- `/order`
 
 ### Seller-only
 - `/seller-dashboard`
@@ -59,20 +56,28 @@ User profile document schema in `users/{uid}`:
 - Unauthorized seller access to buyer routes redirects to `/seller-dashboard`.
 
 ## Collections
+
 ### `users`
-- role-aware profile docs
+Role-aware profile docs.
 
 ### `gigs`
-- `sellerId`, `title`, `description`, `price`, `deliveryTime`, `category`, `rating`, `createdAt`, `imageUrls`
+`sellerId`, `title`, `description`, `price`, `deliveryTime`, `category`, `rating`, `createdAt`, `imageUrls`
 
 ### `orders`
-- `gigId`, `buyerId`, `sellerId`, `price`, `total`, `status`, `createdAt`
-- statuses: `pending`, `in-progress`, `delivered`, `completed`, `cancelled`
+`gigId`, `buyerId`, `sellerId`, `price`, `total`, `status`, `createdAt`
+
+Statuses:
+- `pending`
+- `in-progress`
+- `delivered`
+- `completed`
+- `cancelled`
 
 ### `reviews`
-- `gigId`, `buyerId`, `rating`, `comment`, `sellerId`, `createdAt`
+`gigId`, `buyerId`, `rating`, `comment`, `sellerId`, `createdAt`
 
 ## Features by Role
+
 ### Buyer
 - Browse gigs
 - Place orders
@@ -80,46 +85,56 @@ User profile document schema in `users/{uid}`:
 - Leave reviews on completed orders
 
 ### Seller
-- Create gig (seller-only, includes image upload to Firebase Storage)
+- Create gig (seller-only; includes image upload to Firebase Storage)
 - View only own gigs (`where("sellerId", "==", currentUser.uid)`)
 - Manage own orders
-- View earnings analytics summary
+- View earnings summary
 
 ## Local Setup
 1. Install dependencies:
-```bash
-npm install
-```
-2. Start app:
-```bash
-npm start
-```
-3. Build production:
-```bash
-npm run build
-```
+	```bash
+	npm install
+	```
+2. Start development server:
+	```bash
+	npm start
+	```
+3. Build production bundle:
+	```bash
+	npm run build
+	```
+4. Run lint checks:
+	```bash
+	npm run lint
+	```
+
+## Environment Setup
+Create `.env` from `.env.example` and fill Firebase values.
 
 ## Firebase Security
 - Firestore rules: `firestore.rules`
 - Storage rules: `storage.rules`
 
 ## Deployment
+
 ### Netlify
 - Config: `netlify.toml`
 - Build command: `npm run build`
-- Publish dir: `build`
+- Publish directory: `build`
 
 ### Vercel
 - Config: `vercel.json`
 - SPA rewrite to `index.html` included
 
-## Folder Structure (Key)
-- `src/components/` reusable UI + route guards
-- `src/context/` auth context
-- `src/pages/` role-specific pages
-- `src/services/` Firestore/Storage logic (`gigService`, `orderService`, `reviewService`)
-- `firestore.rules`, `storage.rules` Firebase security
+## CI
+GitHub Actions workflow (`.github/workflows/ci.yml`) runs install and build on pushes/PRs to `main`.
 
-## Dummy Data
-If Firestore has no gigs yet, marketplace automatically falls back to the local dataset in `src/data/gigsData.js`.
->>>>>>> d2cf519 (Update project files)
+## Project Structure (Key)
+- `src/components/`: reusable UI + route guards
+- `src/context/`: auth context
+- `src/pages/`: role-specific and shared pages
+- `src/services/`: Firestore/Storage logic
+- `src/utils/`: shared helpers (including currency formatting)
+
+## Dummy Data Fallback
+If Firestore has no gigs, marketplace pages can fall back to local data from `src/data/gigsData.js`.

@@ -1,4 +1,4 @@
-﻿// central list of gigs used by multiple pages
+// central list of gigs used by multiple pages
 // each gig includes packages and a computed base price for display
 
 export const gigs = [

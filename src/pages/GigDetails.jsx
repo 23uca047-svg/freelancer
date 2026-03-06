@@ -1,9 +1,10 @@
-﻿import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { getGigById } from "../services/gigService";
 import LoadingState from "../components/common/LoadingState";
 import ErrorState from "../components/common/ErrorState";
+import { formatRupees } from "../utils/currency";
 import "./GigDetails.css";
 
 function GigDetails() {
@@ -96,7 +97,7 @@ function GigDetails() {
               className={`package-card ${selectedPackage === key ? "selected" : ""}`}
             >
               <h3>{pkg.name}</h3>
-              <h2>Rs {pkg.price}</h2>
+              <h2>{formatRupees(pkg.price)}</h2>
               <p>Delivery: {pkg.delivery}</p>
               <p>Revisions: {pkg.revisions}</p>
             </div>
@@ -134,10 +135,10 @@ function GigDetails() {
       <button
         className="secondary-action"
         onClick={() => {
-          alert("ðŸ’¬ Contact seller functionality: This would open a direct messaging interface with the seller.");
+          alert("Contact seller functionality: This would open a direct messaging interface with the seller.");
         }}
       >
-        ðŸ’¬ Contact Seller
+        Contact Seller
       </button>
     </div>
   );

@@ -1,8 +1,9 @@
-﻿import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { createOrder } from "../services/orderService";
 import ErrorState from "../components/common/ErrorState";
+import { formatRupees } from "../utils/currency";
 import "./Order.css";
 
 function Order() {
@@ -10,7 +11,7 @@ function Order() {
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  // âœ… Hooks at top
+  // Local form state
   const [requirements, setRequirements] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -32,7 +33,7 @@ function Order() {
   const invoiceNumber = "INV-" + Math.floor(Math.random() * 1000000);
   const orderDate = new Date().toLocaleDateString();
 
-  // ðŸ”¥ SAVE ORDER TO FIREBASE
+  // Save order to Firestore
   const handleConfirmOrder = async () => {
     try {
       setLoading(true);
@@ -80,10 +81,10 @@ function Order() {
       <p><strong>Delivery:</strong> {order.selectedPackage.delivery}</p>
       <p><strong>Seller:</strong> {order.sellerName || "Top Rated Seller"}</p>
 
-      <p>Service Price: â‚¹{price}</p>
-      <p>Service Fee: â‚¹{serviceFee}</p>
+      <p>Service Price: {formatRupees(price)}</p>
+      <p>Service Fee: {formatRupees(serviceFee)}</p>
 
-      {/* ðŸ“ REQUIREMENTS BOX */}
+      {/* Requirements box */}
       <div className="requirements-field">
         <label><strong>Customization / Requirements</strong></label>
         <textarea
@@ -96,7 +97,7 @@ function Order() {
 
       <hr />
 
-      <h3>Total Amount: â‚¹{total}</h3>
+      <h3>Total Amount: {formatRupees(total)}</h3>
 
       <button
         onClick={handleConfirmOrder}

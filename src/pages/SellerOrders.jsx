@@ -1,10 +1,11 @@
-﻿import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import LoadingState from "../components/common/LoadingState";
 import ErrorState from "../components/common/ErrorState";
 import EmptyState from "../components/common/EmptyState";
 import { subscribeSellerOrders, updateOrderStatus } from "../services/orderService";
+import { formatRupees } from "../utils/currency";
 import "./SellerOrders.css";
 
 function SellerOrders() {
@@ -118,7 +119,7 @@ function SellerOrders() {
                     </div>
                   </td>
                   <td>{order.package}</td>
-                  <td className="amount-cell">â‚¹{order.total}</td>
+                  <td className="amount-cell">{formatRupees(order.total)}</td>
                   <td className="status-cell">
                     <span className={`status-badge ${order.status}`}>
                       {order.status.toUpperCase()}
@@ -146,7 +147,7 @@ function SellerOrders() {
                       onClick={() => navigate(`/chat/${order.id}`)}
                       style={{ marginTop: "6px", display: "block" }}
                     >
-                      ðŸ’¬ Chat
+                      Chat
                     </button>
                   </td>
                 </tr>

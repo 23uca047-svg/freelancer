@@ -108,16 +108,18 @@ export async function createGig({ user, title, description, category, price, del
 }
 
 export function subscribeSellerGigs(sellerId, onData, onError) {
-  const q = query(
-    collection(db, "gigs"),
-    where("sellerId", "==", sellerId),
-    orderBy("createdAt", "desc")
-  );
+  const q = query(collection(db, "gigs"), where("sellerId", "==", sellerId));
 
   return onSnapshot(
     q,
     (snapshot) => {
-      onData(snapshot.docs.map((docItem) => toGig({ id: docItem.id, ...docItem.data() })));
+      const items = snapshot.docs.map((docItem) => toGig({ id: docItem.id, ...docItem.data() }));
+      items.sort((a, b) => {
+        const aTime = a.createdAt?.toDate ? a.createdAt.toDate().getTime() : 0;
+        const bTime = b.createdAt?.toDate ? b.createdAt.toDate().getTime() : 0;
+        return bTime - aTime;
+      });
+      onData(items);
     },
     onError
   );

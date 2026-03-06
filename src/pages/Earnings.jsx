@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import LoadingState from "../components/common/LoadingState";
 import ErrorState from "../components/common/ErrorState";
 import { subscribeSellerOrders } from "../services/orderService";
+import { formatRupees } from "../utils/currency";
 import "./Earnings.css";
 
 function Earnings() {
@@ -71,11 +72,11 @@ function Earnings() {
       <div className="earnings-grid">
         <article>
           <span>Total Revenue</span>
-          <strong>Rs {stats.totalRevenue}</strong>
+          <strong>{formatRupees(stats.totalRevenue)}</strong>
         </article>
         <article>
           <span>Delivered (Awaiting Completion)</span>
-          <strong>Rs {stats.potential}</strong>
+          <strong>{formatRupees(stats.potential)}</strong>
         </article>
         <article>
           <span>Completed Orders</span>

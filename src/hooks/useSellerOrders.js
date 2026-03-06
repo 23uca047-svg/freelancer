@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 
 export default function useSellerOrders(currentUser) {
@@ -14,16 +14,19 @@ export default function useSellerOrders(currentUser) {
       return;
     }
 
-    const q = query(
-      collection(db, "orders"),
-      where("sellerId", "==", currentUser.uid),
-      orderBy("createdAt", "desc")
-    );
+    const q = query(collection(db, "orders"), where("sellerId", "==", currentUser.uid));
 
     const unsubscribe = onSnapshot(
       q,
       (snapshot) => {
-        setOrders(snapshot.docs.map((docItem) => ({ id: docItem.id, ...docItem.data() })));
+        const items = snapshot.docs.map((docItem) => ({ id: docItem.id, ...docItem.data() }));
+        items.sort((a, b) => {
+          const aTime = a.createdAt?.toDate ? a.createdAt.toDate().getTime() : 0;
+          const bTime = b.createdAt?.toDate ? b.createdAt.toDate().getTime() : 0;
+          return bTime - aTime;
+        });
+
+        setOrders(items);
         setError("");
         setLoading(false);
       },

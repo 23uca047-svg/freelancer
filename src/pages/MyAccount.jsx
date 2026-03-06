@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../firebase";
 import { collection, query, where, onSnapshot, orderBy } from "firebase/firestore";
@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import LoadingState from "../components/common/LoadingState";
 import ErrorState from "../components/common/ErrorState";
 import EmptyState from "../components/common/EmptyState";
+import { formatRupees } from "../utils/currency";
 import "./MyAccount.css";
 
 function MyAccount() {
@@ -93,7 +94,7 @@ function MyAccount() {
               orders.map((o) => (
                 <div key={o.id} className="account-order">
                   <h3>{o.title}</h3>
-                  <p>Package: {o.package} â€” â‚¹{o.total}</p>
+                  <p>Package: {o.package} - {formatRupees(o.total)}</p>
                   <div className="order-actions">
                     <button onClick={() => navigate(`/order/${o.id}`)}>View</button>
                     <button onClick={() => navigate(`/chat/${o.id}`)}>Chat</button>

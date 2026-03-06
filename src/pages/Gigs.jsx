@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import GigCard from "../components/GigCard";
 import EmptyState from "../components/common/EmptyState";
@@ -6,6 +6,7 @@ import LoadingState from "../components/common/LoadingState";
 import ErrorState from "../components/common/ErrorState";
 import { filterGigs, getGigCategories, getMarketplaceGigs } from "../services/gigService";
 import useDebouncedValue from "../hooks/useDebouncedValue";
+import { formatRupees } from "../utils/currency";
 import "./Gigs.css";
 
 function Gigs() {
@@ -112,7 +113,7 @@ function Gigs() {
         </label>
 
         <label className="control-group" htmlFor="gig-price">
-          <span>Max price: Rs {maxPrice}</span>
+          <span>Max price: {formatRupees(maxPrice)}</span>
           <input
             id="gig-price"
             type="range"

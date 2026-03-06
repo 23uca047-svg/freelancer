@@ -1,5 +1,6 @@
-﻿import { memo } from "react";
+import { memo } from "react";
 import { useNavigate } from "react-router-dom";
+import { formatRupees } from "../utils/currency";
 import "./OrderCard.css";
 
 const statusColors = {
@@ -17,13 +18,13 @@ function OrderCard({ order }) {
 
   const getStatusIcon = (status) => {
     const icons = {
-      pending: "â³",
-      "in-progress": "ðŸ”„",
-      delivered: "ðŸ“¤",
-      completed: "âœ…",
-      cancelled: "âŒ",
+      pending: "...",
+      "in-progress": ">>",
+      delivered: "OUT",
+      completed: "OK",
+      cancelled: "X",
     };
-    return icons[status] || "ðŸ“¦";
+    return icons[status] || "-";
   };
 
   const formatDate = (timestamp) => {
@@ -66,7 +67,7 @@ function OrderCard({ order }) {
         </div>
         <div className="detail-row">
           <span className="label">Amount:</span>
-          <span className="value">â‚¹{order.total}</span>
+          <span className="value">{formatRupees(order.total)}</span>
         </div>
         <div className="detail-row">
           <span className="label">Seller:</span>
@@ -105,7 +106,7 @@ function OrderCard({ order }) {
             >
               <div className="step-circle">
                 {statusSteps.indexOf(step) < statusSteps.indexOf(order.status)
-                  ? "âœ“"
+                  ? "v"
                   : ""}
               </div>
               <span className="step-label">{step}</span>
@@ -127,7 +128,7 @@ function OrderCard({ order }) {
           className="btn-message"
           onClick={() => navigate(`/chat/${order.id}`)}
         >
-          ðŸ’¬ Message Seller
+          Message Seller
         </button>
         <button
           className="btn-details"

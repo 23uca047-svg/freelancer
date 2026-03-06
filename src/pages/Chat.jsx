@@ -1,4 +1,4 @@
-﻿import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../firebase";
@@ -143,7 +143,7 @@ function Chat() {
                   <img src={msg.attachmentURL} alt="attachment" className="attachment-img" />
                 ) : (
                   <a href={msg.attachmentURL} target="_blank" rel="noopener noreferrer" className="attachment-link">
-                    ðŸ“Ž {msg.text}
+                    Attachment: {msg.text}
                   </a>
                 )}
               </div>
@@ -178,7 +178,7 @@ function Chat() {
           className="file-btn"
           title="Attach file (max 5MB)"
         >
-          ðŸ“Ž
+          Attach
         </button>
         <input
           ref={fileInputRef}

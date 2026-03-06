@@ -1,5 +1,6 @@
-﻿import { memo } from "react";
+import { memo } from "react";
 import { useNavigate } from "react-router-dom";
+import { formatRupees } from "../utils/currency";
 import "./GigCard.css";
 
 function GigCard({ gig }) {
@@ -15,10 +16,10 @@ function GigCard({ gig }) {
         <p className="seller-meta">Level 2 Seller</p>
 
         <div className="rating">
-          â­ {gig.rating} <span>({gig.reviews} reviews)</span>
+          * {gig.rating} <span>({gig.reviews} reviews)</span>
         </div>
 
-        <p className="price">â‚¹{gig.price}</p>
+        <p className="price">{formatRupees(gig.price)}</p>
       </div>
     </div>
   );

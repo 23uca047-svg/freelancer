@@ -5,6 +5,7 @@ import EmptyState from "../components/common/EmptyState";
 import LoadingState from "../components/common/LoadingState";
 import ErrorState from "../components/common/ErrorState";
 import { removeGig, subscribeSellerGigs } from "../services/gigService";
+import { formatRupees } from "../utils/currency";
 import "./MyGigs.css";
 
 function MyGigs() {
@@ -78,7 +79,7 @@ function MyGigs() {
                 <h3>{gig.title}</h3>
                 <p>{gig.category}</p>
               </div>
-              <strong>Rs {gig.price}</strong>
+              <strong>{formatRupees(gig.price)}</strong>
               <div className="my-gig-actions">
                 <button type="button" onClick={() => navigate(`/gig/${gig.id}`)}>View</button>
                 <button type="button" className="danger" onClick={() => handleDelete(gig.id)}>Delete</button>

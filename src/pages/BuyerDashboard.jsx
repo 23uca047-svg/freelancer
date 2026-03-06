@@ -5,6 +5,7 @@ import LoadingState from "../components/common/LoadingState";
 import ErrorState from "../components/common/ErrorState";
 import EmptyState from "../components/common/EmptyState";
 import { subscribeBuyerOrders } from "../services/orderService";
+import { formatRupees } from "../utils/currency";
 import "./BuyerDashboard.css";
 
 function BuyerDashboard() {
@@ -80,7 +81,7 @@ function BuyerDashboard() {
         </article>
         <article className="buyer-stat-card">
           <p>Total Spent</p>
-          <h3>Rs {metrics.totalSpent}</h3>
+          <h3>{formatRupees(metrics.totalSpent)}</h3>
         </article>
       </section>
 
@@ -98,7 +99,7 @@ function BuyerDashboard() {
                   <h4>{order.title}</h4>
                   <p>{order.package} package</p>
                 </div>
-                <strong>Rs {order.total}</strong>
+                <strong>{formatRupees(order.total)}</strong>
                 <button type="button" onClick={() => navigate(`/chat/${order.id}`)}>Message Seller</button>
               </article>
             ))}

@@ -1,0 +1,143 @@
+.seller-dashboard {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 34px 20px 60px;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  color: #16202a;
+}
+
+.dashboard-header p {
+  margin: 8px 0 0;
+  color: #64707f;
+}
+
+.seller-stats-grid {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.stat-card {
+  background: #ffffff;
+  border: 1px solid #dce7e3;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 10px 22px rgba(14, 30, 37, 0.06);
+}
+
+.stat-card p {
+  margin: 0;
+  color: #657484;
+  font-size: 0.88rem;
+}
+
+.stat-card h3 {
+  margin: 8px 0 0;
+  color: #0c9c5b;
+  font-size: 1.45rem;
+}
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.dashboard-panel {
+  background: #fff;
+  border: 1px solid #dce7e3;
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.panel-head h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  color: #1c2733;
+}
+
+.panel-head span {
+  color: #5f6c7b;
+  font-size: 0.88rem;
+}
+
+.list-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #e6eceb;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.list-item h4 {
+  margin: 0;
+  color: #1e2a35;
+  font-size: 0.95rem;
+}
+
+.list-item p {
+  margin: 4px 0 0;
+  color: #6d7785;
+  font-size: 0.82rem;
+}
+
+.order-chip {
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  text-transform: capitalize;
+  border: 1px solid transparent;
+}
+
+.order-chip.pending {
+  background: #fff0ef;
+  color: #d65347;
+  border-color: #ffd7d3;
+}
+
+.order-chip.in-progress {
+  background: #fff8e4;
+  color: #976f00;
+  border-color: #ffe7aa;
+}
+
+.order-chip.completed {
+  background: #ecfef2;
+  color: #107649;
+  border-color: #bbeed2;
+}
+
+.order-chip.cancelled {
+  background: #f2f4f7;
+  color: #526171;
+  border-color: #dde3e9;
+}
+
+@media (max-width: 920px) {
+  .seller-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .panel-grid {
+    grid-template-columns: 1fr;
+  }
+}

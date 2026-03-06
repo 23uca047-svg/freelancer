@@ -1,0 +1,61 @@
+.order-page {
+  max-width: 640px;
+  margin: 34px auto 60px;
+  padding: 26px;
+  border: 1px solid #dce8e4;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 14px 28px rgba(15, 33, 45, 0.07);
+}
+
+.order-page h1 {
+  margin-top: 0;
+  color: #17232d;
+}
+
+.order-page p {
+  color: #4f5d6c;
+}
+
+.order-error {
+  background: #fff0ef;
+  border: 1px solid #ffcfc7;
+  color: #c73f31;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.requirements-field {
+  margin-top: 15px;
+}
+
+.requirements-field textarea {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #cfd8d8;
+  resize: vertical;
+  min-height: 120px;
+}
+
+.confirm-order-btn {
+  margin-top: 20px;
+  padding: 12px;
+  width: 100%;
+  background: #16a261;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.confirm-order-btn:hover {
+  background: #128a53;
+}
+
+.confirm-order-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}

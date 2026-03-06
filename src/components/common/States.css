@@ -1,0 +1,63 @@
+.state-box {
+  width: min(720px, 92%);
+  margin: 32px auto;
+  padding: 24px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid #e6ebea;
+  box-shadow: 0 12px 30px rgba(16, 24, 40, 0.06);
+}
+
+.state-title {
+  margin: 0 0 8px;
+  color: #131a20;
+  font-size: 1.25rem;
+}
+
+.state-text {
+  margin: 0;
+  color: #5d6875;
+  line-height: 1.5;
+}
+
+.state-action {
+  margin-top: 18px;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 16px;
+  background: #17a663;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.state-action:hover {
+  background: #108f54;
+}
+
+.loading-row {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.loading-bar {
+  height: 12px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #e7ecec 0%, #f8fbfb 45%, #e7ecec 100%);
+  background-size: 180% 100%;
+  animation: pulse 1.2s infinite;
+}
+
+.loading-bar.short {
+  width: 60%;
+}
+
+@keyframes pulse {
+  0% {
+    background-position: 0% 0;
+  }
+  100% {
+    background-position: -180% 0;
+  }
+}

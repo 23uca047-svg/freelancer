@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .chat-page {
   max-width: 800px;
   margin: 0 auto;
@@ -135,3 +136,157 @@
     font-size: 18px;
   }
 }
+=======
+.chat-page {
+  max-width: 980px;
+  margin: 0 auto;
+  height: calc(100vh - 148px);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #dce7e4;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(17, 30, 38, 0.08);
+}
+
+.chat-header {
+  padding: 18px 20px;
+  background: linear-gradient(120deg, #0f9a5a 0%, #17b46c 100%);
+  color: white;
+  text-align: left;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 18px;
+  overflow-y: auto;
+  background: #f3f7f7;
+}
+
+.chat-message {
+  margin-bottom: 14px;
+  max-width: 70%;
+  padding: 10px 14px 20px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.chat-message.sent {
+  background: #18a665;
+  color: white;
+  margin-left: auto;
+}
+
+.chat-message.received {
+  background: #ffffff;
+  color: #24303c;
+  border: 1px solid #e0e8ea;
+  margin-right: auto;
+}
+
+.sender {
+  font-size: 12px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.text {
+  margin: 0;
+  word-wrap: break-word;
+}
+
+.time {
+  font-size: 10px;
+  color: rgba(18, 27, 36, 0.54);
+  position: absolute;
+  bottom: 4px;
+  right: 8px;
+}
+
+.sent .time {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.chat-input-area {
+  display: flex;
+  border-top: 1px solid #deeaeb;
+  background: #fff;
+}
+
+.chat-input-area input {
+  flex: 1;
+  padding: 14px 16px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.chat-input-area button {
+  padding: 0 18px;
+  background: #17a765;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.chat-input-area .file-btn {
+  padding: 0 12px;
+  background: #6f7f97;
+  font-size: 18px;
+}
+
+.chat-input-area .file-btn:hover {
+  background: #6b7a94;
+}
+
+.chat-input-area button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.attachment {
+  margin: 8px 0;
+}
+
+.attachment-img {
+  max-width: 200px;
+  border-radius: 6px;
+  margin: 6px 0;
+}
+
+.attachment-link {
+  display: inline-block;
+  padding: 8px 12px;
+  background: #f3f7f7;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #0f8f54;
+  font-weight: 600;
+}
+
+.sent .attachment-link {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .chat-page {
+    height: calc(100vh - 132px);
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .chat-messages {
+    padding: 12px;
+  }
+
+  .chat-header h2 {
+    font-size: 18px;
+  }
+}
+>>>>>>> d2cf519 (Update project files)

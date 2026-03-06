@@ -1,0 +1,47 @@
+.earnings-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 34px 20px 60px;
+}
+
+.earnings-page h1 {
+  margin: 0;
+  color: #18242e;
+}
+
+.earnings-page p {
+  margin: 8px 0 0;
+  color: #667382;
+}
+
+.earnings-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.earnings-grid article {
+  border: 1px solid #dce8e4;
+  border-radius: 12px;
+  background: #fff;
+  padding: 14px;
+  display: grid;
+  gap: 8px;
+}
+
+.earnings-grid span {
+  color: #5f6d7b;
+  font-size: 0.85rem;
+}
+
+.earnings-grid strong {
+  color: #0f9557;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 900px) {
+  .earnings-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

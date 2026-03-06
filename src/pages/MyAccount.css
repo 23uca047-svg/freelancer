@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .my-account { max-width: 1000px; margin: 0 auto; padding: 30px; }
 .my-account-header { margin-bottom: 16px; }
 .tabs { display:flex; gap:8px; margin-bottom:16px; }
@@ -8,3 +9,164 @@
 .order-actions button { padding:8px 10px; border-radius:4px; border:none; background:#1dbf73; color:white; cursor:pointer; }
 .messages-list ul { list-style:none; padding:0; }
 .messages-list li { margin-bottom:8px; }
+=======
+.my-account {
+	max-width: 1060px;
+	margin: 0 auto;
+	padding: 32px 20px 60px;
+}
+
+.my-account-header {
+	margin-bottom: 16px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px;
+}
+
+.my-account-header h1 {
+	margin: 0;
+	color: #1b2732;
+}
+
+.my-account-header p {
+	margin: 6px 0 0;
+	color: #667382;
+}
+
+.profile-rating {
+	border: 1px solid #d8e6df;
+	border-radius: 12px;
+	background: #fff;
+	padding: 10px 14px;
+	text-align: right;
+}
+
+.profile-rating strong {
+	display: block;
+	color: #119258;
+}
+
+.profile-rating span {
+	color: #637283;
+	font-size: 0.84rem;
+}
+
+.profile-meta {
+	margin-bottom: 16px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
+}
+
+.profile-meta article {
+	border: 1px solid #dce8e4;
+	border-radius: 12px;
+	background: #fff;
+	padding: 14px;
+}
+
+.profile-meta h3,
+.profile-meta h4 {
+	margin: 0;
+	color: #1d2935;
+}
+
+.profile-meta p {
+	margin: 8px 0 0;
+	color: #667585;
+}
+
+.profile-meta ul {
+	margin: 10px 0 0;
+	padding-left: 18px;
+	color: #5f6c7b;
+}
+
+.tabs {
+	display: flex;
+	gap: 8px;
+	margin-bottom: 16px;
+}
+
+.tabs button {
+	padding: 9px 14px;
+	border-radius: 8px;
+	border: 1px solid #d6e2de;
+	background: #fff;
+	cursor: pointer;
+}
+
+.tabs button.active {
+	background: #17a765;
+	color: #fff;
+	border-color: #17a765;
+}
+
+.account-order {
+	padding: 14px;
+	border: 1px solid #e4eceb;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	background: #fff;
+}
+
+.account-order h3 {
+	margin: 0;
+	color: #1c2834;
+}
+
+.account-order p {
+	margin: 8px 0 0;
+	color: #647180;
+}
+
+.order-actions {
+	margin-top: 10px;
+	display: flex;
+	gap: 8px;
+}
+
+.order-actions button {
+	padding: 8px 12px;
+	border-radius: 8px;
+	border: none;
+	background: #1aa867;
+	color: white;
+	cursor: pointer;
+}
+
+.messages-list ul {
+	list-style: none;
+	padding: 0;
+}
+
+.messages-list li {
+	margin-bottom: 8px;
+}
+
+.messages-list button {
+	border: 1px solid #dae5e1;
+	border-radius: 8px;
+	background: #fff;
+	padding: 10px;
+	width: 100%;
+	text-align: left;
+	cursor: pointer;
+}
+
+@media (max-width: 760px) {
+	.my-account-header {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.profile-rating {
+		text-align: left;
+	}
+
+	.profile-meta {
+		grid-template-columns: 1fr;
+	}
+}
+>>>>>>> d2cf519 (Update project files)

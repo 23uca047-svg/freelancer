@@ -1,0 +1,107 @@
+.gig-details-page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 34px 20px 60px;
+}
+
+.gig-details-page h2 {
+  margin: 0 0 14px;
+  color: #16212c;
+}
+
+.gig-details-page img {
+  width: min(520px, 100%);
+  border-radius: 14px;
+  border: 1px solid #deeae7;
+}
+
+.gig-details-page > p {
+  margin-top: 16px;
+  color: #5d6a79;
+}
+
+.seller-details-box {
+  margin-top: 14px;
+  border: 1px solid #dbe5e5;
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.seller-details-box h4 {
+  margin: 0 0 8px;
+  color: #1b2732;
+}
+
+.seller-details-box p {
+  margin: 6px 0 0;
+  color: #5f6c7b;
+}
+
+.packages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.package-card {
+  border: 1px solid #d8e5e2;
+  padding: 18px;
+  cursor: pointer;
+  border-radius: 12px;
+  background: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.package-card.selected {
+  border-color: #16a25f;
+  box-shadow: 0 10px 24px rgba(10, 50, 40, 0.12);
+  transform: translateY(-2px);
+}
+
+.package-card h3,
+.package-card h2,
+.package-card p {
+  margin: 0;
+}
+
+.package-card h2 {
+  margin-top: 8px;
+  color: #129057;
+  font-size: 1.4rem;
+}
+
+.package-card p {
+  margin-top: 8px;
+  color: #606d7d;
+}
+
+.primary-action,
+.secondary-action {
+  margin-top: 24px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.primary-action {
+  background: #18a664;
+  color: white;
+  border: none;
+  margin-right: 10px;
+}
+
+.secondary-action {
+  background: white;
+  color: #108f54;
+  border: 1px solid #17a564;
+  font-weight: 600;
+}
+
+.seller-note {
+  margin-top: 12px;
+  color: #5d6b79;
+  font-size: 0.92rem;
+}

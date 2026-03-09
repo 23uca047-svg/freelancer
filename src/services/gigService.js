@@ -11,9 +11,91 @@ import {
   serverTimestamp,
   where,
 } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { gigsWithPrice } from "../data/gigsData";
-import { db, storage } from "../firebase";
+import { db } from "../firebase";
+
+const FIRESTORE_IMAGE_LIMIT_BYTES = 850 * 1024;
+const MAX_IMAGE_DIMENSION = 1200;
+
+function canvasToBlob(canvas, quality) {
+  return new Promise((resolve) => {
+    canvas.toBlob((blob) => resolve(blob), "image/jpeg", quality);
+  });
+}
+
+function blobToDataUrl(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result || "");
+    reader.onerror = () => reject(new Error("Unable to process image."));
+    reader.readAsDataURL(blob);
+  });
+}
+
+function loadImageFromFile(file) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    const objectUrl = URL.createObjectURL(file);
+
+    image.onload = () => {
+      URL.revokeObjectURL(objectUrl);
+      resolve(image);
+    };
+
+    image.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      reject(new Error("Unable to read selected image."));
+    };
+
+    image.src = objectUrl;
+  });
+}
+
+async function imageFileToGigDataUrl(file) {
+  if (!file.type.startsWith("image/")) {
+    throw new Error("Please choose a valid image file.");
+  }
+
+  const image = await loadImageFromFile(file);
+  const longestEdge = Math.max(image.width, image.height);
+  const scale = longestEdge > MAX_IMAGE_DIMENSION ? MAX_IMAGE_DIMENSION / longestEdge : 1;
+  const width = Math.max(1, Math.round(image.width * scale));
+  const height = Math.max(1, Math.round(image.height * scale));
+
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+
+  const context = canvas.getContext("2d");
+  if (!context) {
+    throw new Error("Unable to process image.");
+  }
+
+  context.drawImage(image, 0, 0, width, height);
+
+  let quality = 0.82;
+  let blob = await canvasToBlob(canvas, quality);
+
+  while (blob && blob.size > FIRESTORE_IMAGE_LIMIT_BYTES && quality > 0.48) {
+    quality -= 0.08;
+    blob = await canvasToBlob(canvas, quality);
+  }
+
+  if (!blob) {
+    throw new Error("Unable to process image.");
+  }
+
+  if (blob.size > FIRESTORE_IMAGE_LIMIT_BYTES) {
+    throw new Error("Image is too large after optimization. Please use a smaller image.");
+  }
+
+  const dataUrl = await blobToDataUrl(blob);
+  if (typeof dataUrl !== "string" || !dataUrl.startsWith("data:image/")) {
+    throw new Error("Unable to process image.");
+  }
+
+  return dataUrl;
+}
 
 function toGig(record) {
   return {
@@ -76,17 +158,17 @@ export async function getGigById(id) {
   return fallbackGigs().find((gig) => gig.id === String(id)) || null;
 }
 
-export async function createGig({ user, title, description, category, price, deliveryTime, imageFile }) {
+export async function createGig({ user, title, description, category, price, deliveryTime, imageFile, onUploadProgress }) {
   if (!user || user.role !== "seller") {
     throw new Error("Only sellers can create gigs.");
   }
 
   let imageUrls = [];
   if (imageFile) {
-    const storageRef = ref(storage, `gigs/${user.uid}/${Date.now()}_${imageFile.name}`);
-    await uploadBytes(storageRef, imageFile);
-    const downloadURL = await getDownloadURL(storageRef);
-    imageUrls = [downloadURL];
+    if (typeof onUploadProgress === "function") onUploadProgress(15);
+    const imageDataUrl = await imageFileToGigDataUrl(imageFile);
+    if (typeof onUploadProgress === "function") onUploadProgress(90);
+    imageUrls = [imageDataUrl];
   }
 
   const payload = {
@@ -104,7 +186,9 @@ export async function createGig({ user, title, description, category, price, del
     createdAt: serverTimestamp(),
   };
 
-  return addDoc(collection(db, "gigs"), payload);
+  const created = await addDoc(collection(db, "gigs"), payload);
+  if (typeof onUploadProgress === "function") onUploadProgress(100);
+  return created;
 }
 
 export function subscribeSellerGigs(sellerId, onData, onError) {

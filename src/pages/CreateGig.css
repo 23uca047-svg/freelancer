@@ -44,6 +44,11 @@
   font-weight: 600;
 }
 
+.create-gig-help {
+  font-size: 12px;
+  color: #6e7b8a;
+}
+
 .create-gig-form input,
 .create-gig-form textarea,
 .create-gig-form select {

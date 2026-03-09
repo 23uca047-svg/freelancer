@@ -4,6 +4,8 @@ import { useAuth } from "../context/AuthContext";
 import { createGig } from "../services/gigService";
 import "./CreateGig.css";
 
+const MAX_GIG_IMAGE_SIZE = 8 * 1024 * 1024;
+
 function CreateGig() {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -15,7 +17,35 @@ function CreateGig() {
   const [deliveryTime, setDeliveryTime] = useState("3 days");
   const [imageFile, setImageFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [submitState, setSubmitState] = useState("idle");
   const [error, setError] = useState("");
+
+  const handleImageChange = (event) => {
+    const file = event.target.files?.[0] || null;
+
+    if (!file) {
+      setImageFile(null);
+      return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+      setError("Please select a valid image file.");
+      setImageFile(null);
+      event.target.value = "";
+      return;
+    }
+
+    if (file.size > MAX_GIG_IMAGE_SIZE) {
+      setError("Image is too large. Max size is 8MB.");
+      setImageFile(null);
+      event.target.value = "";
+      return;
+    }
+
+    setError("");
+    setImageFile(file);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -28,6 +58,8 @@ function CreateGig() {
     try {
       setLoading(true);
       setError("");
+      setSubmitState(imageFile ? "uploading" : "publishing");
+      setUploadProgress(0);
 
       await createGig({
         user,
@@ -37,15 +69,25 @@ function CreateGig() {
         price,
         deliveryTime,
         imageFile,
+        onUploadProgress: setUploadProgress,
       });
+
+      setSubmitState("publishing");
 
       alert("Gig created successfully");
       navigate("/my-gigs");
     } catch (submitError) {
       console.error("Failed to create gig", submitError);
-      setError(submitError.message || "Failed to create gig.");
+      const message = submitError?.message || "Failed to create gig. Please try again.";
+      if (message.toLowerCase().includes("timed out") || message.toLowerCase().includes("stalled")) {
+        setError("Image upload is taking too long. Try a smaller image (JPG/WEBP under 2MB) and publish again.");
+      } else {
+        setError(message);
+      }
     } finally {
       setLoading(false);
+      setUploadProgress(0);
+      setSubmitState("idle");
     }
   };
 
@@ -92,10 +134,17 @@ function CreateGig() {
 
         <label>
           <span>Image</span>
-          <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files?.[0] || null)} />
+          <input type="file" accept="image/*" onChange={handleImageChange} />
+          <small className="create-gig-help">Max image size: 8MB (images are optimized automatically for faster upload).</small>
         </label>
 
-        <button type="submit" disabled={loading}>{loading ? "Creating..." : "Publish Gig"}</button>
+        <button type="submit" disabled={loading}>
+          {loading
+            ? submitState === "uploading"
+              ? `Uploading image... ${uploadProgress}%`
+              : "Publishing gig..."
+            : "Publish Gig"}
+        </button>
       </form>
     </section>
   );
